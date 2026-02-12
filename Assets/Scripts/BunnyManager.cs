@@ -10,7 +10,7 @@ public class BunnyManager : MonoBehaviour
     [SerializeField] private Image bunnyIcon;
     [SerializeField] private Slider bunnyCuteness;
     [SerializeField] private Slider bunnyPlayfulness;
-    [SerializeField] private Slider bunnyAffection;
+    [SerializeField] private Slider bunnyFriendliness;
 
     public void ShowStatsPanel(string name, float cutenessStat, float playfulnessStat, float affectionStat)
     {
@@ -18,7 +18,7 @@ public class BunnyManager : MonoBehaviour
         bunnyName.text = name;
         bunnyCuteness.value = cutenessStat;
         bunnyPlayfulness.value = playfulnessStat;
-        bunnyAffection.value = affectionStat;
+        bunnyFriendliness.value = affectionStat;
     }
 
     public void HideStatsPanel()
