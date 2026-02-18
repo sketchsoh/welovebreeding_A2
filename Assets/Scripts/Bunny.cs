@@ -75,6 +75,7 @@ public class Bunny : MonoBehaviour
     private void OnMouseDown()
     {
         held = true;
+        bunnyManager.ShowStatsPanel(bunnyName, cutenessStat, playfulnessStat, friendlinessStat);
     }
 
     private void OnMouseUp()

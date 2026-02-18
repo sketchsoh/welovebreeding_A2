@@ -57,9 +57,9 @@ public class BunnyManager : MonoBehaviour
     {
         statsPanel.SetActive(true);
         bunnyName.text = name;
-        bunnyCuteness.value = cutenessStat;
-        bunnyPlayfulness.value = playfulnessStat;
-        bunnyFriendliness.value = affectionStat;
+        bunnyCuteness.value = cutenessStat / 100;
+        bunnyPlayfulness.value = playfulnessStat / 100;
+        bunnyFriendliness.value = affectionStat / 100;
     }
 
     public void HideStatsPanel()
@@ -99,7 +99,10 @@ public class BunnyManager : MonoBehaviour
 
         Color bunnyColor = Random.ColorHSV(0.0f, 1.0f, 0.3f, 0.75f, 0.75f, 1.0f);
         Bunny newBunny = Instantiate(bunnyPrefab, transform.position, Quaternion.identity).GetComponent<Bunny>();
-        newBunny.InitializeBunny("Test", selectedBunnyType, bunnyColor, bunnyTail, bunnyBody, bunnyHead, bunnyEar, 50f, 50f, 50f);
+        float cutenessStat = Random.Range(0f, 100f);
+        float playfulnessStat = Random.Range(0f, 100f);
+        float friendlinessStat = Random.Range(0f, 100f);
+        newBunny.InitializeBunny("Test", selectedBunnyType, bunnyColor, bunnyTail, bunnyBody, bunnyHead, bunnyEar, cutenessStat, playfulnessStat, friendlinessStat);
         newBunny.transform.position = new Vector3(Random.Range(minXBounds, maxXBounds), Random.Range(minYBounds, maxYBounds));
     }
 
