@@ -1,0 +1,494 @@
+fileFormatVersion: 2
+guid: 1303b8bea9774400aa9ffbf4b56f3442
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2884576125156693500
+    second: NormalRabbit_0
+  - first:
+      213: -8954283137041610201
+    second: NormalRabbit_1
+  - first:
+      213: 225945409648482813
+    second: NormalRabbit_2
+  - first:
+      213: -684652893315026982
+    second: NormalRabbit_3
+  - first:
+      213: 8512396092696402432
+    second: NormalRabbit_4
+  - first:
+      213: 5618216702857228885
+    second: NormalRabbit_5
+  - first:
+      213: 3609203224548661708
+    second: NormalRabbit_6
+  - first:
+      213: -6904828062336482224
+    second: NormalRabbit_7
+  - first:
+      213: 3954196760056091611
+    second: NormalRabbit_8
+  - first:
+      213: -8577504745839566893
+    second: NormalRabbit_9
+  - first:
+      213: 6184580863057879162
+    second: NormalRabbit_10
+  - first:
+      213: -6292599404859672776
+    second: NormalRabbit_11
+  - first:
+      213: 987100029302915535
+    second: NormalRabbit_12
+  - first:
+      213: 5817118477961797093
+    second: NormalRabbit_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: NormalRabbit_0
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 422
+        width: 105
+        height: 108
+      alignment: 9
+      pivot: {x: 0.52756697, y: 0.120609425}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf59983e3b2180820800000000000000
+      internalID: 2884576125156693500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NormalRabbit_1
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 402
+        width: 137
+        height: 108
+      alignment: 9
+      pivot: {x: 0.4577414, y: 0.8927901}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72a4d5ebdeefbb380800000000000000
+      internalID: -8954283137041610201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NormalRabbit_2
+      rect:
+        serializedVersion: 2
+        x: 1271
+        y: 430
+        width: 213
+        height: 66
+      alignment: 9
+      pivot: {x: 0.5240358, y: 0.46633494}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df95ab82728b22300800000000000000
+      internalID: 225945409648482813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NormalRabbit_3
+      rect:
+        serializedVersion: 2
+        x: 1540
+        y: 448
+        width: 63
+        height: 56
+      alignment: 9
+      pivot: {x: 0.5918918, y: 0.15506853}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adfa38b22df9f76f0800000000000000
+      internalID: -684652893315026982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NormalRabbit_4
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 298
+        width: 132
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00a979c452b122670800000000000000
+      internalID: 8512396092696402432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NormalRabbit_5
+      rect:
+        serializedVersion: 2
+        x: 1095
+        y: 298
+        width: 132
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 552b8fc135ae7fd40800000000000000
+      internalID: 5618216702857228885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NormalRabbit_6
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 298
+        width: 132
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc9da69d537761230800000000000000
+      internalID: 3609203224548661708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NormalRabbit_7
+      rect:
+        serializedVersion: 2
+        x: 1502
+        y: 298
+        width: 132
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 054094de57f1d20a0800000000000000
+      internalID: -6904828062336482224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NormalRabbit_8
+      rect:
+        serializedVersion: 2
+        x: 918
+        y: 123
+        width: 144
+        height: 129
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd3d427c00120e630800000000000000
+      internalID: 3954196760056091611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NormalRabbit_9
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 123
+        width: 165
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3df510511e496f880800000000000000
+      internalID: -8577504745839566893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NormalRabbit_10
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 16
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a706e33178b04d550800000000000000
+      internalID: 6184580863057879162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NormalRabbit_11
+      rect:
+        serializedVersion: 2
+        x: 1158
+        y: 14
+        width: 76
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 837318f4e223ca8a0800000000000000
+      internalID: -6292599404859672776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NormalRabbit_12
+      rect:
+        serializedVersion: 2
+        x: 1359
+        y: 6
+        width: 78
+        height: 77
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc1c06c2f32e2bd00800000000000000
+      internalID: 987100029302915535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NormalRabbit_13
+      rect:
+        serializedVersion: 2
+        x: 1565
+        y: 26
+        width: 105
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ed164f6f6e8ab050800000000000000
+      internalID: 5817118477961797093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 2108f9f6802c94d6a8acef1fd500df97
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      NormalRabbit_0: 2884576125156693500
+      NormalRabbit_1: -8954283137041610201
+      NormalRabbit_10: 6184580863057879162
+      NormalRabbit_11: -6292599404859672776
+      NormalRabbit_12: 987100029302915535
+      NormalRabbit_13: 5817118477961797093
+      NormalRabbit_2: 225945409648482813
+      NormalRabbit_3: -684652893315026982
+      NormalRabbit_4: 8512396092696402432
+      NormalRabbit_5: 5618216702857228885
+      NormalRabbit_6: 3609203224548661708
+      NormalRabbit_7: -6904828062336482224
+      NormalRabbit_8: 3954196760056091611
+      NormalRabbit_9: -8577504745839566893
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

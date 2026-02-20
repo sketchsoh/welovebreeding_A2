@@ -1,0 +1,494 @@
+fileFormatVersion: 2
+guid: fb154651c86bd477dbd1f0dc91802bcf
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3169240041310942119
+    second: SpottedRabbit_0
+  - first:
+      213: -922482651388286307
+    second: SpottedRabbit_1
+  - first:
+      213: -6546452535807605974
+    second: SpottedRabbit_2
+  - first:
+      213: 6080151027713064532
+    second: SpottedRabbit_3
+  - first:
+      213: -1111215996978140481
+    second: SpottedRabbit_4
+  - first:
+      213: -7692731035773281549
+    second: SpottedRabbit_5
+  - first:
+      213: -6369458031618866923
+    second: SpottedRabbit_6
+  - first:
+      213: -4820752353735279092
+    second: SpottedRabbit_7
+  - first:
+      213: 8858737654729431900
+    second: SpottedRabbit_8
+  - first:
+      213: 4180052149503520197
+    second: SpottedRabbit_9
+  - first:
+      213: -1823620858475017445
+    second: SpottedRabbit_10
+  - first:
+      213: 4511576030041191087
+    second: SpottedRabbit_11
+  - first:
+      213: 3798248716699013898
+    second: SpottedRabbit_12
+  - first:
+      213: 8357058302830831588
+    second: SpottedRabbit_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SpottedRabbit_0
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 951
+        width: 105
+        height: 108
+      alignment: 9
+      pivot: {x: 0.52618116, y: 0.1181878}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a37846b6076bfb20800000000000000
+      internalID: 3169240041310942119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpottedRabbit_1
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 931
+        width: 137
+        height: 108
+      alignment: 9
+      pivot: {x: 0.5, y: 0.91575}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9a6a848aeea233f0800000000000000
+      internalID: -922482651388286307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpottedRabbit_2
+      rect:
+        serializedVersion: 2
+        x: 1264
+        y: 959
+        width: 213
+        height: 66
+      alignment: 9
+      pivot: {x: 0.5418128, y: 0.49267486}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a238b307a145625a0800000000000000
+      internalID: -6546452535807605974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpottedRabbit_3
+      rect:
+        serializedVersion: 2
+        x: 1533
+        y: 977
+        width: 63
+        height: 56
+      alignment: 9
+      pivot: {x: 0.58727056, y: 0.18909454}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45e309b4529016450800000000000000
+      internalID: 6080151027713064532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpottedRabbit_4
+      rect:
+        serializedVersion: 2
+        x: 893
+        y: 827
+        width: 132
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbae26f20fa2490f0800000000000000
+      internalID: -1111215996978140481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpottedRabbit_5
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 827
+        width: 132
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fa5c1c71eded3590800000000000000
+      internalID: -7692731035773281549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpottedRabbit_6
+      rect:
+        serializedVersion: 2
+        x: 1294
+        y: 827
+        width: 132
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5114995caa32b97a0800000000000000
+      internalID: -6369458031618866923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpottedRabbit_7
+      rect:
+        serializedVersion: 2
+        x: 1495
+        y: 827
+        width: 132
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0efa75964f391db0800000000000000
+      internalID: -4820752353735279092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpottedRabbit_8
+      rect:
+        serializedVersion: 2
+        x: 911
+        y: 652
+        width: 144
+        height: 129
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5b568c16fe80fa70800000000000000
+      internalID: 8858737654729431900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpottedRabbit_9
+      rect:
+        serializedVersion: 2
+        x: 1085
+        y: 652
+        width: 165
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cde3c97847820a30800000000000000
+      internalID: 4180052149503520197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpottedRabbit_10
+      rect:
+        serializedVersion: 2
+        x: 950
+        y: 545
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1b8a9dbd7231b6e0800000000000000
+      internalID: -1823620858475017445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpottedRabbit_11
+      rect:
+        serializedVersion: 2
+        x: 1151
+        y: 543
+        width: 76
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa2b5c7fe765c9e30800000000000000
+      internalID: 4511576030041191087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpottedRabbit_12
+      rect:
+        serializedVersion: 2
+        x: 1352
+        y: 535
+        width: 78
+        height: 77
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a039d67751716b430800000000000000
+      internalID: 3798248716699013898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpottedRabbit_13
+      rect:
+        serializedVersion: 2
+        x: 1558
+        y: 555
+        width: 105
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e7e573bf3c3af370800000000000000
+      internalID: 8357058302830831588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 08731984619844d3abaaf3a3b9fa0c7d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      SpottedRabbit_0: 3169240041310942119
+      SpottedRabbit_1: -922482651388286307
+      SpottedRabbit_10: -1823620858475017445
+      SpottedRabbit_11: 4511576030041191087
+      SpottedRabbit_12: 3798248716699013898
+      SpottedRabbit_13: 8357058302830831588
+      SpottedRabbit_2: -6546452535807605974
+      SpottedRabbit_3: 6080151027713064532
+      SpottedRabbit_4: -1111215996978140481
+      SpottedRabbit_5: -7692731035773281549
+      SpottedRabbit_6: -6369458031618866923
+      SpottedRabbit_7: -4820752353735279092
+      SpottedRabbit_8: 8858737654729431900
+      SpottedRabbit_9: 4180052149503520197
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
