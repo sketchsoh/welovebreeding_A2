@@ -1,0 +1,179 @@
+{
+  "traitList": [
+    {
+      "traitName": "Immunodeficiency",
+      "personalitySet": 0,
+      "playfulnessAdjustment": -3.0,
+      "cutenessAdjustment": 6.0,
+      "friendlinessAdjustment": 0.0
+    },
+    {
+      "traitName": "Hypermobility",
+      "personalitySet": 0,
+      "playfulnessAdjustment": 8.0,
+      "cutenessAdjustment": 0.0,
+      "friendlinessAdjustment": -3.0
+    },
+    {
+      "traitName": "Low Stamina",
+      "personalitySet": 0,
+      "playfulnessAdjustment": -7.0,
+      "cutenessAdjustment": 4.0,
+      "friendlinessAdjustment": 0.0
+    },
+    {
+      "traitName": "Fast Reflexes",
+      "personalitySet": 0,
+      "playfulnessAdjustment": 9.0,
+      "cutenessAdjustment": 0.0,
+      "friendlinessAdjustment": 1.0
+    },
+    {
+      "traitName": "High Metabolism",
+      "personalitySet": 0,
+      "playfulnessAdjustment": 6.0,
+      "cutenessAdjustment": -3.0,
+      "friendlinessAdjustment": 0.0
+    },
+    {
+      "traitName": "Hypotonia",
+      "personalitySet": 0,
+      "playfulnessAdjustment": -5.0,
+      "cutenessAdjustment": 7.0,
+      "friendlinessAdjustment": 0.0
+    },
+    {
+      "traitName": "Deep Sleeper",
+      "personalitySet": 0,
+      "playfulnessAdjustment": -4.0,
+      "cutenessAdjustment": 5.0,
+      "friendlinessAdjustment": 3.0
+    },
+    {
+      "traitName": "Oxytocin Sensitivity",
+      "personalitySet": 0,
+      "playfulnessAdjustment": 0.0,
+      "cutenessAdjustment": 4.0,
+      "friendlinessAdjustment": 10.0
+    },
+    {
+      "traitName": "Pain Hypoesthesia",
+      "personalitySet": 0,
+      "playfulnessAdjustment": 4.0,
+      "cutenessAdjustment": 2.0,
+      "friendlinessAdjustment": -5.0
+    },
+    {
+      "traitName": "Worrywart",
+      "personalitySet": 1,
+      "playfulnessAdjustment": -4.0,
+      "cutenessAdjustment": 5.0,
+      "friendlinessAdjustment": -6.0
+    },
+    {
+      "traitName": "Serene",
+      "personalitySet": 1,
+      "playfulnessAdjustment": 3.0,
+      "cutenessAdjustment": 0.0,
+      "friendlinessAdjustment": 7.0
+    },
+    {
+      "traitName": "Jolly",
+      "personalitySet": 2,
+      "playfulnessAdjustment": 9.0,
+      "cutenessAdjustment": 2.0,
+      "friendlinessAdjustment": 5.0
+    },
+    {
+      "traitName": "Emo",
+      "personalitySet": 2,
+      "playfulnessAdjustment": -5.0,
+      "cutenessAdjustment": 6.0,
+      "friendlinessAdjustment": -2.0
+    },
+    {
+      "traitName": "Destructive",
+      "personalitySet": 3,
+      "playfulnessAdjustment": 8.0,
+      "cutenessAdjustment": -6.0,
+      "friendlinessAdjustment": -7.0
+    },
+    {
+      "traitName": "Pacifist",
+      "personalitySet": 3,
+      "playfulnessAdjustment": -3.0,
+      "cutenessAdjustment": 3.0,
+      "friendlinessAdjustment": 9.0
+    },
+    {
+      "traitName": "Pristine",
+      "personalitySet": 4,
+      "playfulnessAdjustment": 0.0,
+      "cutenessAdjustment": 8.0,
+      "friendlinessAdjustment": 3.0
+    },
+    {
+      "traitName": "Clumsy",
+      "personalitySet": 4,
+      "playfulnessAdjustment": 6.0,
+      "cutenessAdjustment": 2.0,
+      "friendlinessAdjustment": -6.0
+    },
+    {
+      "traitName": "Recluse",
+      "personalitySet": 5,
+      "playfulnessAdjustment": 0.0,
+      "cutenessAdjustment": 3.0,
+      "friendlinessAdjustment": -10.0
+    },
+    {
+      "traitName": "Social Butterfly",
+      "personalitySet": 5,
+      "playfulnessAdjustment": 4.0,
+      "cutenessAdjustment": 3.0,
+      "friendlinessAdjustment": 10.0
+    },
+    {
+      "traitName": "Glutton",
+      "personalitySet": 6,
+      "playfulnessAdjustment": 7.0,
+      "cutenessAdjustment": 0.0,
+      "friendlinessAdjustment": -4.0
+    },
+    {
+      "traitName": "On A Diet",
+      "personalitySet": 6,
+      "playfulnessAdjustment": -3.0,
+      "cutenessAdjustment": 6.0,
+      "friendlinessAdjustment": 0.0
+    },
+    {
+      "traitName": "Lazy",
+      "personalitySet": 7,
+      "playfulnessAdjustment": -9.0,
+      "cutenessAdjustment": 5.0,
+      "friendlinessAdjustment": 0.0
+    },
+    {
+      "traitName": "Hyper",
+      "personalitySet": 7,
+      "playfulnessAdjustment": 10.0,
+      "cutenessAdjustment": -2.0,
+      "friendlinessAdjustment": 2.0
+    },
+    {
+      "traitName": "Needy",
+      "personalitySet": 8,
+      "playfulnessAdjustment": 2.0,
+      "cutenessAdjustment": 6.0,
+      "friendlinessAdjustment": 9.0
+    },
+    {
+      "traitName": "Independent",
+      "personalitySet": 8,
+      "playfulnessAdjustment": 4.0,
+      "cutenessAdjustment": 0.0,
+      "friendlinessAdjustment": -7.0
+    }
+  ]
+}

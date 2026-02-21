@@ -1,6 +1,8 @@
-using TMPro;
+using System;
+using System.Collections.Generic;using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class BunnyManager : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class BunnyManager : MonoBehaviour
     [SerializeField] private Slider bunnyCuteness;
     [SerializeField] private Slider bunnyPlayfulness;
     [SerializeField] private Slider bunnyFriendliness;
+    [SerializeField] private TextMeshProUGUI traitPanel;
     [SerializeField] private int startingBunnyCount = 5;
 
     [Header("Bunny Sprites")]
@@ -33,6 +36,9 @@ public class BunnyManager : MonoBehaviour
     [SerializeField] private Sprite[] spottedTailSprites;
 
     [SerializeField] private GameObject bunnyPrefab;
+
+    private TraitData traitList;
+    [SerializeField] private TextAsset traitData;
     
     private const float minXBounds = -0.4f;
     private const float maxXBounds = 6.5f;
@@ -41,6 +47,8 @@ public class BunnyManager : MonoBehaviour
 
     void Start()
     {
+        traitList = new TraitData();
+        ReadFromJson();
         GenerateStartingBunnies();
     }
 
@@ -53,13 +61,19 @@ public class BunnyManager : MonoBehaviour
     }
     
 
-    public void ShowStatsPanel(string name, float cutenessStat, float playfulnessStat, float affectionStat)
+    public void ShowStatsPanel(string name, float cutenessStat, float playfulnessStat, float affectionStat, List<TraitType> traits)
     {
         statsPanel.SetActive(true);
         bunnyName.text = name;
         bunnyCuteness.value = cutenessStat / 100;
         bunnyPlayfulness.value = playfulnessStat / 100;
         bunnyFriendliness.value = affectionStat / 100;
+        string traitListString = "";
+        foreach (TraitType trait in traits)
+        {
+            traitListString += trait.traitName + "\n";
+        }
+        traitPanel.text = traitListString;
     }
 
     public void HideStatsPanel()
@@ -97,12 +111,15 @@ public class BunnyManager : MonoBehaviour
                 break;
         }
 
-        Color bunnyColor = Random.ColorHSV(0.0f, 1.0f, 0.3f, 0.75f, 0.75f, 1.0f);
+        Color bunnyColor = Random.ColorHSV(0.0f, 1.0f, 0.1f, 0.4f, 0.7f, 1.0f);
         Bunny newBunny = Instantiate(bunnyPrefab, transform.position, Quaternion.identity).GetComponent<Bunny>();
-        float cutenessStat = Random.Range(0f, 100f);
-        float playfulnessStat = Random.Range(0f, 100f);
-        float friendlinessStat = Random.Range(0f, 100f);
-        newBunny.InitializeBunny("Test", selectedBunnyType, bunnyColor, bunnyTail, bunnyBody, bunnyHead, bunnyEar, cutenessStat, playfulnessStat, friendlinessStat);
+        List<TraitType> newTraitList = new List<TraitType>();
+        newTraitList.Add(traitList.traitList[Random.Range(0, traitList.traitList.Count)]);
+        newTraitList.Add(traitList.traitList[Random.Range(0, traitList.traitList.Count)]);
+        newTraitList.Add(traitList.traitList[Random.Range(0, traitList.traitList.Count)]);
+        string newBunnyName = bunnyNames[Random.Range(0, bunnyNames.Count)];
+        bunnyNames.Remove(newBunnyName);
+        newBunny.InitializeBunny(newBunnyName, selectedBunnyType, bunnyColor, bunnyTail, bunnyBody, bunnyHead, bunnyEar, newTraitList);
         newBunny.transform.position = new Vector3(Random.Range(minXBounds, maxXBounds), Random.Range(minYBounds, maxYBounds));
     }
 
@@ -113,6 +130,45 @@ public class BunnyManager : MonoBehaviour
             GenerateBunny();
         }
     }
+
+    private void ReadFromJson()
+    {
+        traitList = JsonUtility.FromJson<TraitData>(traitData.text);
+    }
+
+    private List<string> bunnyNames = new List<string>()
+    {
+        "USAGI",
+        "BABY",
+        "CARRIE", 
+        "WEI", 
+        "JUN", 
+        "HAO", 
+        "ADRIAN", 
+        "LORENZO", 
+        "YUKI", 
+        "CRESPY", 
+        "CREME", 
+        "OLIVE", 
+        "HAMMY", 
+        "EARS",
+        "MOLLY", 
+        "POPPY", 
+        "MADDIE", 
+        "RUE", 
+        "LEXIE", 
+        "GEORGE", 
+        "MIKE", 
+        "KEVIN", 
+        "SOO", 
+        "PRINCE", 
+        "TAMMY", 
+        "LIVIE",
+        "MUSH", 
+        "KAT", 
+        "DAWG", 
+        "SANA"
+    };
 }
 
 public enum BunnyType
@@ -120,4 +176,20 @@ public enum BunnyType
     Gradient,
     Normal,
     Spotted
+}
+
+[Serializable]
+public class TraitType
+{
+    public string traitName = "";
+    public int personalitySet = 0;
+    public float playfulnessAdjustment = 0.0f;
+    public float cutenessAdjustment = 0.0f;
+    public float friendlinessAdjustment = 0.0f;
+}
+
+[Serializable]
+public class TraitData
+{
+    public List<TraitType> traitList =  new List<TraitType>();
 }

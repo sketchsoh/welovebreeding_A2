@@ -408,6 +408,7 @@ MonoBehaviour:
   bunnyName: Jeff
   bunnyAge: 0
   bunnyType: 1
+  bunnySpeed: 200
   bunnyColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!58 &4531711661085500470
 CircleCollider2D:
@@ -471,4 +472,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
