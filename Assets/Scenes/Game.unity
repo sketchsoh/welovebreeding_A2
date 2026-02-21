@@ -351,6 +351,7 @@ MonoBehaviour:
   bunnyCuteness: {fileID: 1498561476}
   bunnyPlayfulness: {fileID: 1021210463}
   bunnyFriendliness: {fileID: 629552851}
+  traitPanel: {fileID: 200660878}
   startingBunnyCount: 5
   gradientHeadSprites:
   - {fileID: -4761283417536689697, guid: cce502317abe1432ea52da56a4ad598e, type: 3}
