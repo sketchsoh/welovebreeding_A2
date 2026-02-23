@@ -38,6 +38,17 @@ public class Bunny : MonoBehaviour
     private float waitingTime;
     private float movingTime;
     private bool moving;
+
+    private int defaultTailLayer = 7;
+    private int defaultBodyLayer = 8;
+    private int defaultHeadLayer = 10;
+    private int defaultEarsLayer = 9;
+    
+    private int heldTailLayer = 17;
+    private int heldBodyLayer = 18;
+    private int heldHeadLayer = 20;
+    private int heldEarsLayer = 19;
+    
     
     public void InitializeBunny(
         string bunnyName, 
@@ -88,11 +99,25 @@ public class Bunny : MonoBehaviour
 
     private void Update()
     {
+        Collider2D bunnyCollider = GetComponent<Collider2D>();
         if (held)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            bunnyCollider.enabled = false;
             transform.position = mousePos;
+            bunnyTail.sortingOrder = heldTailLayer;
+            bunnyHead.sortingOrder = heldHeadLayer;
+            bunnyBody.sortingOrder = heldBodyLayer;
+            bunnyEars.sortingOrder = heldEarsLayer;
             return;
+        }
+        else
+        {
+            bunnyCollider.enabled = true;
+            bunnyTail.sortingOrder = defaultTailLayer;
+            bunnyHead.sortingOrder = defaultHeadLayer;
+            bunnyBody.sortingOrder = defaultBodyLayer;
+            bunnyEars.sortingOrder = defaultEarsLayer;
         }
 
         if (waitingTime > 0 && !moving)
@@ -145,5 +170,14 @@ public class Bunny : MonoBehaviour
     private void OnMouseUp()
     {
         held = false;
+        foreach (GameObject bunny in bunnyManager.bunnies)
+        {
+            if (bunny == gameObject) continue;
+            if (Vector3.Distance(transform.position, bunny.transform.position) < 0.5f) // tolerance
+            {
+                Debug.Log(name + " is breeding with " + bunny.name);
+                break;
+            }
+        }
     }
 }

@@ -39,6 +39,7 @@ public class BunnyManager : MonoBehaviour
 
     private TraitData traitList;
     [SerializeField] private TextAsset traitData;
+    public List<GameObject> bunnies {private set; get;}
     
     private const float minXBounds = -0.4f;
     private const float maxXBounds = 6.5f;
@@ -48,6 +49,7 @@ public class BunnyManager : MonoBehaviour
     void Start()
     {
         traitList = new TraitData();
+        bunnies = new List<GameObject>();
         ReadFromJson();
         GenerateStartingBunnies();
     }
@@ -113,6 +115,7 @@ public class BunnyManager : MonoBehaviour
 
         Color bunnyColor = Random.ColorHSV(0.0f, 1.0f, 0.1f, 0.4f, 0.7f, 1.0f);
         Bunny newBunny = Instantiate(bunnyPrefab, transform.position, Quaternion.identity).GetComponent<Bunny>();
+        bunnies.Add(newBunny.gameObject);
         List<TraitType> newTraitList = new List<TraitType>();
         newTraitList.Add(traitList.traitList[Random.Range(0, traitList.traitList.Count)]);
         newTraitList.Add(traitList.traitList[Random.Range(0, traitList.traitList.Count)]);
