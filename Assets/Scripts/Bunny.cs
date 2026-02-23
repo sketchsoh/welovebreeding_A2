@@ -12,7 +12,7 @@ public class Bunny : MonoBehaviour
     private const float maxYBounds = 3f;
     
     private BunnyManager bunnyManager;
-    private List<TraitType> bunnyTraits;
+    public List<TraitType> bunnyTraits;
     private Vector2 currentMoveDirection;
     private Rigidbody2D rb2d;
     
@@ -29,7 +29,8 @@ public class Bunny : MonoBehaviour
     
     [Header("Other Stats")]
     [SerializeField] public string bunnyName;
-    [SerializeField] public float bunnyAge;
+    [SerializeField] public int bunnyFertility;
+    [SerializeField] public float bunnyAge = 1;
     [SerializeField] public BunnyType bunnyType;
     [SerializeField] private float bunnySpeed;
     [SerializeField] public Color bunnyColor;
@@ -38,22 +39,24 @@ public class Bunny : MonoBehaviour
     private float waitingTime;
     private float movingTime;
     private bool moving;
+    public bool canBreed;
 
-    private int defaultTailLayer = 7;
-    private int defaultBodyLayer = 8;
-    private int defaultHeadLayer = 10;
-    private int defaultEarsLayer = 9;
-    
-    private int heldTailLayer = 17;
-    private int heldBodyLayer = 18;
-    private int heldHeadLayer = 20;
-    private int heldEarsLayer = 19;
-    
-    
+    private const int defaultTailLayer = 7;
+    private const int defaultBodyLayer = 8;
+    private const int defaultHeadLayer = 10;
+    private const int defaultEarsLayer = 9;
+
+    private const int heldTailLayer = 17;
+    private const int heldBodyLayer = 18;
+    private const int heldHeadLayer = 20;
+    private const int heldEarsLayer = 19;
+
+
     public void InitializeBunny(
-        string bunnyName, 
+        string newName, 
         BunnyType type, 
         Color color,
+        int fertility,
         Sprite Tail, 
         Sprite Body, 
         Sprite Head, 
@@ -70,21 +73,28 @@ public class Bunny : MonoBehaviour
         bunnyHead.color = bunnyColor;
         bunnyEars.sprite = Ears;
         bunnyEars.color = bunnyColor;
+        bunnyFertility = fertility;
         bunnyTraits = traits;
         cutenessStat = 50f;
         playfulnessStat = 50f;
         friendlinessStat = 50f;
         SettleTraits();
-        this.bunnyName = bunnyName;
-        gameObject.name = bunnyName;
-        bunnyAge = 0;
+        bunnyName = newName;
+        gameObject.name = newName;
         bunnyType = type;
         held = false;
         rb2d = GetComponent<Rigidbody2D>();
         waitingTime = Random.Range(1f, 4f);
         movingTime = 0f;
         moving = false;
+        canBreed = true;
         bunnyManager = FindAnyObjectByType<BunnyManager>();
+        transform.localScale = new Vector3(0.75f, 0.75f, 1f);
+        if (bunnyAge == 0)
+        {
+            canBreed = false;
+            transform.localScale *= 0.75f;
+        }
     }
 
     private void SettleTraits()
@@ -170,12 +180,19 @@ public class Bunny : MonoBehaviour
     private void OnMouseUp()
     {
         held = false;
+        if (bunnyAge == 0) return;
+        if (!canBreed) return;
         foreach (GameObject bunny in bunnyManager.bunnies)
         {
             if (bunny == gameObject) continue;
+            if (bunny.GetComponent<Bunny>().bunnyAge == 0) continue;
+            if (!bunny.GetComponent<Bunny>().canBreed) continue;
             if (Vector3.Distance(transform.position, bunny.transform.position) < 0.5f) // tolerance
             {
                 Debug.Log(name + " is breeding with " + bunny.name);
+                canBreed = false;
+                bunnyManager.BreedBunnies(this, bunny.GetComponent<Bunny>());
+                bunny.GetComponent<Bunny>().canBreed = false;
                 break;
             }
         }

@@ -398,6 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 897a5e9963bdf4040bc543a6edb7d4aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bunnyTraits: []
   bunnyTail: {fileID: 7209965235419460333}
   bunnyBody: {fileID: 3627637109064240389}
   bunnyHead: {fileID: 2646997619127545850}
@@ -406,7 +407,7 @@ MonoBehaviour:
   playfulnessStat: 0
   friendlinessStat: 0
   bunnyName: Jeff
-  bunnyAge: 0
+  bunnyAge: 1
   bunnyType: 1
   bunnySpeed: 200
   bunnyColor: {r: 0, g: 0, b: 0, a: 0}

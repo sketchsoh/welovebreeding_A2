@@ -122,7 +122,9 @@ public class BunnyManager : MonoBehaviour
         newTraitList.Add(traitList.traitList[Random.Range(0, traitList.traitList.Count)]);
         string newBunnyName = bunnyNames[Random.Range(0, bunnyNames.Count)];
         bunnyNames.Remove(newBunnyName);
-        newBunny.InitializeBunny(newBunnyName, selectedBunnyType, bunnyColor, bunnyTail, bunnyBody, bunnyHead, bunnyEar, newTraitList);
+        newBunny.bunnyAge = 1f;
+        int fertility = Random.Range(1, 5);
+        newBunny.InitializeBunny(newBunnyName, selectedBunnyType, bunnyColor, fertility, bunnyTail, bunnyBody, bunnyHead, bunnyEar, newTraitList);
         newBunny.transform.position = new Vector3(Random.Range(minXBounds, maxXBounds), Random.Range(minYBounds, maxYBounds));
     }
 
@@ -137,6 +139,95 @@ public class BunnyManager : MonoBehaviour
     private void ReadFromJson()
     {
         traitList = JsonUtility.FromJson<TraitData>(traitData.text);
+    }
+
+    public List<Bunny> BreedBunnies(Bunny daddy, Bunny mommy)
+    {
+        List<Bunny> newBunnies = new List<Bunny>();
+        int averageFertility = (daddy.bunnyFertility + mommy.bunnyFertility) / 2;
+        for (int i = 0; i < averageFertility; i++)
+        {
+            newBunnies.Add(PopOutBunny(daddy, mommy));
+        }
+        return newBunnies;
+    }
+
+    private Bunny PopOutBunny(Bunny daddy, Bunny mommy)
+    {
+        List<TraitType> daddyTraits = daddy.bunnyTraits;
+        List<TraitType> mommyTraits = mommy.bunnyTraits;
+        List<TraitType> babyTraits = new List<TraitType>();
+        int randSeed = Random.Range(0, 2);
+        babyTraits = randSeed == 0 ? GenerateTraits(daddyTraits, mommyTraits) : GenerateTraits(mommyTraits, daddyTraits);
+        randSeed = Random.Range(0, 2);
+        Color babyColor = randSeed == 0 ? daddy.bunnyColor : mommy.bunnyColor;
+        randSeed = Random.Range(0, 2);
+        BunnyType newBunnyType = randSeed == 0 ? daddy.bunnyType : mommy.bunnyType;
+        string newBunnyName = bunnyNames[Random.Range(0, bunnyNames.Count)];
+        bunnyNames.Remove(newBunnyName);
+        Sprite bunnyHead = null;
+        Sprite bunnyBody = null;
+        Sprite bunnyEar = null;
+        Sprite bunnyTail = null;
+        switch (newBunnyType)
+        {
+            case BunnyType.Normal:
+                bunnyHead = normalHeadSprites[Random.Range(0, normalHeadSprites.Length)];
+                bunnyBody = normalBodySprites[Random.Range(0, normalBodySprites.Length)];
+                bunnyEar = normalEarSprites[Random.Range(0, normalEarSprites.Length)];
+                bunnyTail = normalTailSprites[Random.Range(0, normalTailSprites.Length)];
+                break;
+            case BunnyType.Spotted:
+                bunnyHead = spottedHeadSprites[Random.Range(0, normalHeadSprites.Length)];
+                bunnyBody = spottedBodySprites[Random.Range(0, spottedBodySprites.Length)];
+                bunnyEar = spottedEarSprites[Random.Range(0, spottedEarSprites.Length)];
+                bunnyTail = spottedTailSprites[Random.Range(0, spottedTailSprites.Length)];
+                break;
+            case BunnyType.Gradient:
+                bunnyHead = gradientHeadSprites[Random.Range(0, gradientHeadSprites.Length)];
+                bunnyBody = gradientBodySprites[Random.Range(0, gradientBodySprites.Length)];
+                bunnyEar = gradientEarSprites[Random.Range(0, gradientEarSprites.Length)];
+                bunnyTail = gradientTailSprites[Random.Range(0, gradientTailSprites.Length)];
+                break;
+        }
+        Bunny newBunny = Instantiate(bunnyPrefab, transform.position, Quaternion.identity).GetComponent<Bunny>();
+        bunnies.Add(newBunny.gameObject);
+        newBunny.bunnyAge = 0f;
+        int minFertility = Math.Min(daddy.bunnyFertility, mommy.bunnyFertility);
+        int maxFertility = Math.Max(daddy.bunnyFertility, mommy.bunnyFertility);
+        int fertility = Random.Range(minFertility, maxFertility );
+        newBunny.InitializeBunny(newBunnyName,newBunnyType, babyColor, fertility, bunnyTail, bunnyBody, bunnyHead, bunnyEar, babyTraits);
+        newBunny.transform.position = (daddy.transform.position + mommy.transform.position) / 2;
+        return newBunny;
+    }
+
+    private List<TraitType> GenerateTraits(List<TraitType> dominantTrait, List<TraitType> submissiveTrait)
+    {
+        List<TraitType> babyTraits = new List<TraitType>();
+        foreach (TraitType trait in dominantTrait)
+        {
+            if (babyTraits.Contains(trait)) continue;
+            if (babyTraits.Count >= 5) break;
+            if (Random.Range(0, 11) <= 5)
+            {
+                babyTraits.Add(trait);
+            }
+        }
+        
+        foreach (TraitType trait in submissiveTrait)
+        {
+            if (babyTraits.Contains(trait)) continue;
+            if (trait.personalitySet != 0)
+            {
+                if (babyTraits.FindAll(x => x.personalitySet == trait.personalitySet).Count > 0) continue;
+            }
+            if (babyTraits.Count >= 5) break;
+            if (Random.Range(0, 11) <= 5)
+            {
+                babyTraits.Add(trait);
+            }
+        }
+        return babyTraits;
     }
 
     private List<string> bunnyNames = new List<string>()
