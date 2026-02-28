@@ -11,7 +11,7 @@ public class Bunny : MonoBehaviour
     private const float minYBounds = -1.15f;
     private const float maxYBounds = 3f;
     
-    private BunnyManager bunnyManager;
+    public BunnyManager bunnyManager;
     public List<TraitType> bunnyTraits;
     private Vector2 currentMoveDirection;
     private Rigidbody2D rb2d;
@@ -180,6 +180,17 @@ public class Bunny : MonoBehaviour
     private void OnMouseUp()
     {
         held = false;
+        Vector2 pos = transform.position;
+        if (pos.x >= -8f && pos.x <= -2f)
+        {
+            FindFirstObjectByType<CustomerManager>().SellBunny(this);
+            return;
+        }
+        
+        pos.x = Mathf.Clamp(pos.x, minXBounds, maxXBounds);
+        pos.y = Mathf.Clamp(pos.y, minYBounds, maxYBounds);
+        transform.position = pos;
+        
         if (bunnyAge == 0) return;
         if (!canBreed) return;
         foreach (GameObject bunny in bunnyManager.bunnies)

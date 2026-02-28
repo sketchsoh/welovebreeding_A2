@@ -1,5 +1,7 @@
 using System;
-using System.Collections.Generic;using TMPro;
+using System.Collections.Generic;
+using LitMotion;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -52,24 +54,34 @@ public class BunnyManager : MonoBehaviour
         bunnies = new List<GameObject>();
         ReadFromJson();
         GenerateStartingBunnies();
+        HideStatsPanel();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
-            GenerateBunny();
+            Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
+            
     }
-    
 
     public void ShowStatsPanel(string name, float cutenessStat, float playfulnessStat, float affectionStat, List<TraitType> traits)
     {
         statsPanel.SetActive(true);
         bunnyName.text = name;
-        bunnyCuteness.value = cutenessStat / 100;
-        bunnyPlayfulness.value = playfulnessStat / 100;
-        bunnyFriendliness.value = affectionStat / 100;
+        LMotion.Create(0f, cutenessStat / 100f, 0.25f)
+            .WithEase(Ease.InSine)
+            .Bind(x => bunnyCuteness.value = x);
+        LMotion.Create(0f, playfulnessStat / 100f, 0.25f)
+            .WithEase(Ease.InSine)
+            .Bind(x => bunnyPlayfulness.value = x);
+        LMotion.Create(0f, affectionStat / 100f, 0.25f)
+            .WithEase(Ease.InSine)
+            .Bind(x => bunnyFriendliness.value = x);
+        // bunnyCuteness.value = cutenessStat / 100;
+        // bunnyPlayfulness.value = playfulnessStat / 100;
+        // bunnyFriendliness.value = affectionStat / 100;
         string traitListString = "";
         foreach (TraitType trait in traits)
         {
@@ -117,9 +129,18 @@ public class BunnyManager : MonoBehaviour
         Bunny newBunny = Instantiate(bunnyPrefab, transform.position, Quaternion.identity).GetComponent<Bunny>();
         bunnies.Add(newBunny.gameObject);
         List<TraitType> newTraitList = new List<TraitType>();
-        newTraitList.Add(traitList.traitList[Random.Range(0, traitList.traitList.Count)]);
-        newTraitList.Add(traitList.traitList[Random.Range(0, traitList.traitList.Count)]);
-        newTraitList.Add(traitList.traitList[Random.Range(0, traitList.traitList.Count)]);
+        int traitCount = Random.Range(1, 3);
+        newTraitList.Add(traitList.traitList.FindAll(x => x.personalitySet == 0)[Random.Range(0, traitList.traitList.FindAll(x => x.personalitySet == 0).Count)]);
+        for (int i = 0; i < traitCount; i++)
+        {
+            List<TraitType> personalityTraits = traitList.traitList.FindAll(x => x.personalitySet > 0);
+            TraitType newTrait = personalityTraits[Random.Range(0, personalityTraits.Count)];
+            while (newTraitList.Contains(newTrait))
+            {
+                newTrait = personalityTraits[Random.Range(0, personalityTraits.Count)];
+            }
+            newTraitList.Add(newTrait);
+        }
         string newBunnyName = bunnyNames[Random.Range(0, bunnyNames.Count)];
         bunnyNames.Remove(newBunnyName);
         newBunny.bunnyAge = 1f;
@@ -195,7 +216,7 @@ public class BunnyManager : MonoBehaviour
         newBunny.bunnyAge = 0f;
         int minFertility = Math.Min(daddy.bunnyFertility, mommy.bunnyFertility);
         int maxFertility = Math.Max(daddy.bunnyFertility, mommy.bunnyFertility);
-        int fertility = Random.Range(minFertility, maxFertility );
+        int fertility = Random.Range(minFertility, maxFertility + 1 );
         newBunny.InitializeBunny(newBunnyName,newBunnyType, babyColor, fertility, bunnyTail, bunnyBody, bunnyHead, bunnyEar, babyTraits);
         newBunny.transform.position = (daddy.transform.position + mommy.transform.position) / 2;
         return newBunny;
