@@ -1438,6 +1438,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fb54ded3bf9c49228155de4c7a81b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  day: 0
+  currentCustomer: 0
+  bunnyList: []
+  cManager: {fileID: 0}
+  bManager: {fileID: 0}
+  bunniesSold: 0
+  prevPublicPerception: 0
+  prevCultPerception: 0
+  currPublicPerception: 0
+  currCultPerception: 0
 --- !u!4 &1422731402
 Transform:
   m_ObjectHideFlags: 0
@@ -1643,6 +1653,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1265831307223983507, guid: 4f47a245a3dfc47b0a7a9577a94b8319, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1265831307223983507, guid: 4f47a245a3dfc47b0a7a9577a94b8319, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2731963830805626183, guid: 4f47a245a3dfc47b0a7a9577a94b8319, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1094.1201
@@ -1703,6 +1721,10 @@ PrefabInstance:
       propertyPath: 'musicSounds.Array.data[2]'
       value: 
       objectReference: {fileID: 8300000, guid: 0dd0409c9ab294d079ebff90053b2727, type: 3}
+    - target: {fileID: 7940254389753656200, guid: 4f47a245a3dfc47b0a7a9577a94b8319, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7969869714792099353, guid: 4f47a245a3dfc47b0a7a9577a94b8319, type: 3}
       propertyPath: m_Name
       value: SoundManager

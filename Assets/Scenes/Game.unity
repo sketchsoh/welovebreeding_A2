@@ -428,7 +428,7 @@ MonoBehaviour:
   bunnyPlayfulness: {fileID: 1021210463}
   bunnyFriendliness: {fileID: 629552851}
   traitPanel: {fileID: 200660878}
-  startingBunnyCount: 5
+  startingBunnyCount: 4
   gradientHeadSprites:
   - {fileID: -4761283417536689697, guid: cce502317abe1432ea52da56a4ad598e, type: 3}
   - {fileID: -7849881149509865182, guid: cce502317abe1432ea52da56a4ad598e, type: 3}
@@ -2480,7 +2480,10 @@ MonoBehaviour:
   payuSprite: {fileID: -2921467001212070124, guid: 7b0c1b8d1f6a44a82a24cc059567214d, type: 3}
   clzySprite: {fileID: 5463421974527002263, guid: d8503dd4e42d04d3ba1e248c46c79575, type: 3}
   cultSprite: {fileID: 2450906019118661676, guid: e50bfcb3030f6458985b94c54aca2f31, type: 3}
+  prevCustomerName: 
+  nextButton: {fileID: 845806139}
   donatedBunnies: []
+  dayText: {fileID: 1279981396}
 --- !u!1 &1275917463
 GameObject:
   m_ObjectHideFlags: 0

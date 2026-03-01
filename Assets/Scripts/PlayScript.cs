@@ -28,7 +28,7 @@ public class PlayScript : MonoBehaviour, IPointerEnterHandler
 
     private void SwitchToGame()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("HowToPlay");
     }
     
     public void QuitGame()

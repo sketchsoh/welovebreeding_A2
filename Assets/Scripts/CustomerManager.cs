@@ -21,11 +21,47 @@ public class CustomerManager : MonoBehaviour
     public Sprite payuSprite;
     public Sprite clzySprite;
     public Sprite cultSprite;
-    
+    public string prevCustomerName = "";
+    public GameObject nextButton;
     public List<Bunny> donatedBunnies = new List<Bunny>();
+    public TextMeshProUGUI dayText;
     
     private string[] customerNames = { "Clzy", "Payu", "Hachi" };
     private static int currentCustomerIndex = 0;
+
+    private string[] cultCollectionLines =
+    {
+        "Do not greet us. Present the offerings.",
+        "Pick carefully. This is not reversible",
+    };
+
+    private string[] cultReceiveGoodLines =
+    {
+        "Suitable.",
+        "Up to par.",
+        "Standard.",
+    };
+
+    private string[] cultReceiveBadLines =
+    {
+        "It will not feed the quota.",
+        "These are not the right ones.",
+        "Not Suitable.",
+        "Below Standard"
+    };
+    private string[] cultHappyLines =
+    {
+        "The quotas are met. The shop lives to see another cycle.",
+        "The public is pleased. The circle is quiet. For now."
+    };
+
+    private string[] cultAngryLines =
+    {
+        "You have failed to meet the quota.",
+        "Do better next cycle.",
+        "This will be noted."
+    };
+    
     // private Dictionary<int, CustomerRequest> customerList = new Dictionary<int, CustomerRequest>();
     private Queue<CustomerRequest> requestQueue = new Queue<CustomerRequest>();
     private List<CustomerRequest> customerRequestList = new List<CustomerRequest>
@@ -80,15 +116,36 @@ public class CustomerManager : MonoBehaviour
         LMotion.Create(-1250f, -550f, 0.5f)
             .WithEase(Ease.InOutElastic)
             .BindToAnchoredPosition3DX(customerSprite.GetComponent<RectTransform>());
-        customerRequestText.text = GameManager.Instance.currentCultRequest.flavorText;
+        if (currentCustomer == CurrentCustomer.CultStart)
+        {
+            customerRequestText.text = GameManager.Instance.currentCultRequest.flavorText;
+        }
+        else
+        {
+            customerRequestText.text = cultCollectionLines[Random.Range(0, cultCollectionLines.Length)];
+            nextButton.SetActive(true);
+        }
     }
 
     public void GiveToCult(Bunny bunny)
     {
         donatedBunnies.Add(bunny);
         bunny.bunnyManager.bunnies.Remove(bunny.gameObject);
-        GameManager.Instance.bunnyList.Remove(bunny.gameObject);
+        GameManager.Instance.bunnyList.Remove(bunny);
         bunny.gameObject.SetActive(false);
+        string currentRequestTrait = GameManager.Instance.currentCultRequest.traitRequirement;
+        if (bunny.bunnyTraits.Find(x => x.traitName == currentRequestTrait) != null)
+        {
+            customerRequestText.text = cultReceiveGoodLines[Random.Range(0, cultReceiveGoodLines.Length)];
+        }
+        else
+        {
+            customerRequestText.text = cultReceiveBadLines[Random.Range(0, cultReceiveBadLines.Length)];
+        }
+        if (GameManager.Instance.currentCultRequest.AmountRequirement <= donatedBunnies.FindAll(x => x.bunnyTraits.FindAll(x => x.traitName == GameManager.Instance.currentCultRequest.traitRequirement).Count > 0).Count)
+        {
+            SettleCult();
+        }
     }
 
     public void SettleCult()
@@ -101,6 +158,27 @@ public class CustomerManager : MonoBehaviour
                 bunnyCount++;
             }
         }
+
+        if (bunnyCount >= GameManager.Instance.currentCultRequest.AmountRequirement)
+        {
+            customerRequestText.text = cultHappyLines[Random.Range(0, cultHappyLines.Length)];
+            nextButton.SetActive(false);
+            GameManager.Instance.currCultPerception += 20f;
+        }
+        else
+        {
+            customerRequestText.text = cultAngryLines[Random.Range(0, cultAngryLines.Length)];
+            
+            nextButton.SetActive(false);
+        }
+        
+        Invoke(nameof(CustomerLeave), 1.5f);
+    }
+
+    private void EndCult()
+    {
+        GameManager.Instance.day = 4;
+        SceneManager.LoadScene("EOD", LoadSceneMode.Additive);
     }
 
     private void AssignCustomerSprite(string customerName)
@@ -127,6 +205,11 @@ public class CustomerManager : MonoBehaviour
     {
         GameManager.Instance.currentCustomer = CurrentCustomer.Customer;
         string cName = customerNames[Random.Range(0, customerNames.Length)];
+        while (cName == prevCustomerName)
+        {
+            cName = customerNames[Random.Range(0, customerNames.Length)];
+        }
+        prevCustomerName = cName;
         AssignCustomerSprite(cName);
         customerName.text = cName.ToUpper();
             CustomerRequest newCustomerRequest = Request();
@@ -187,14 +270,18 @@ public class CustomerManager : MonoBehaviour
         {
             customerRequestText.text = perfectReaction[Random.Range(0, perfectReaction.Count)];
             bunnyManager.bunnies.Remove(bunny.gameObject);
-            GameManager.Instance.bunnyList.Remove(bunny.gameObject);
+            GameManager.Instance.bunnyList.Remove(bunny);
+            GameManager.Instance.bunniesSold++;
+            GameManager.Instance.currPublicPerception = GameManager.Instance.prevPublicPerception + 20f;
             bunny.gameObject.SetActive(false);
         }
         else if (happiness >= 50)
         {
             customerRequestText.text = goodReaction[Random.Range(0, goodReaction.Count)];
             bunnyManager.bunnies.Remove(bunny.gameObject);
-            GameManager.Instance.bunnyList.Remove(bunny.gameObject);
+            GameManager.Instance.bunnyList.Remove(bunny);
+            GameManager.Instance.bunniesSold++;
+            GameManager.Instance.currPublicPerception = GameManager.Instance.prevPublicPerception + 10f;
             bunny.gameObject.SetActive(false);
         }
         else if (happiness >= 20)
@@ -202,6 +289,7 @@ public class CustomerManager : MonoBehaviour
             customerRequestText.text = mehReaction[Random.Range(0, mehReaction.Count)];
             Vector2 pos = bunny.transform.position;
             pos.x = Mathf.Clamp(pos.x, minXBounds, maxXBounds);
+            GameManager.Instance.currPublicPerception = GameManager.Instance.prevPublicPerception - 10f;
             bunny.transform.position = pos;
             
         }
@@ -210,12 +298,13 @@ public class CustomerManager : MonoBehaviour
             customerRequestText.text = badReaction[Random.Range(0, badReaction.Count)];
             Vector2 pos = bunny.transform.position;
             pos.x = Mathf.Clamp(pos.x, minXBounds, maxXBounds);
+            GameManager.Instance.currPublicPerception = GameManager.Instance.prevPublicPerception - 15f;
             bunny.transform.position = pos;
         }
 
         requestQueue.Dequeue();
 
-        Invoke(nameof(CustomerLeave), 2f);
+        Invoke(nameof(CustomerLeave), 1.5f);
     }
 
     public void NextButtonSettle()
@@ -228,6 +317,7 @@ public class CustomerManager : MonoBehaviour
         if (GameManager.Instance.currentCustomer == CurrentCustomer.CultStart)
         {
             AssignNewCustomer();
+            nextButton.SetActive(false);
         }
 
         if (GameManager.Instance.currentCustomer == CurrentCustomer.CultCollect)

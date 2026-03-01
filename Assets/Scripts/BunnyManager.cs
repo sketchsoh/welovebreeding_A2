@@ -60,15 +60,6 @@ public class BunnyManager : MonoBehaviour
         GameManager.Instance.StartDay();
     }
 
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        }
-            
-    }
-
     public void ShowStatsPanel(string name, int fertility, float cutenessStat, float playfulnessStat, float affectionStat, List<TraitType> traits)
     {
         statsPanel.SetActive(true);
@@ -103,7 +94,7 @@ public class BunnyManager : MonoBehaviour
         statsPanel.SetActive(false);
     }
 
-    private void GenerateBunny()
+    private void GenerateBunny(TraitType mandatoryTrait = null)
     {
         int rand =  Random.Range(0, 3);
         BunnyType selectedBunnyType = (BunnyType)rand;
@@ -136,15 +127,19 @@ public class BunnyManager : MonoBehaviour
         Color bunnyColor = Random.ColorHSV(0.0f, 1.0f, 0.1f, 0.4f, 0.7f, 1.0f);
         Bunny newBunny = Instantiate(bunnyPrefab, transform.position, Quaternion.identity).GetComponent<Bunny>();
         bunnies.Add(newBunny.gameObject);
-        GameManager.Instance.bunnyList.Add(newBunny.gameObject);
+        GameManager.Instance.bunnyList.Add(newBunny);
         List<TraitType> newTraitList = new List<TraitType>();
         int traitCount = Random.Range(1, 3);
+        if (mandatoryTrait != null)
+        {
+            newTraitList.Add(mandatoryTrait);
+        }
         newTraitList.Add(traitList.traitList.FindAll(x => x.personalitySet == 0)[Random.Range(0, traitList.traitList.FindAll(x => x.personalitySet == 0).Count)]);
         for (int i = 0; i < traitCount; i++)
         {
             List<TraitType> personalityTraits = traitList.traitList.FindAll(x => x.personalitySet > 0);
             TraitType newTrait = personalityTraits[Random.Range(0, personalityTraits.Count)];
-            while (newTraitList.Contains(newTrait))
+            while (newTraitList.Contains(newTrait) && newTraitList.FindAll(x => x.personalitySet == newTrait.personalitySet).Count > 0)
             {
                 newTrait = personalityTraits[Random.Range(0, personalityTraits.Count)];
             }
@@ -158,20 +153,22 @@ public class BunnyManager : MonoBehaviour
         newBunny.transform.position = new Vector3(Random.Range(minXBounds, maxXBounds), Random.Range(minYBounds, maxYBounds));
     }
 
-    public void PlaceBunny(List<GameObject> bunnyList)
+    public void PlaceBunny(List<Bunny> bunnyList)
     {
-        foreach (GameObject bunny in bunnyList)
+        foreach (Bunny bunny in bunnyList)
         {
-            Instantiate(bunny);
+            Bunny newBunny = Instantiate(bunnyPrefab).gameObject.GetComponent<Bunny>();
+            newBunny.InitializeBunny(bunny.bunnyName, bunny.bunnyType, bunny.bunnyColor, bunny.bunnyFertility, bunny.bunnyTail.sprite, bunny.bunnyBody.sprite, bunny.bunnyHead.sprite, bunny.bunnyEars.sprite, bunny.bunnyTraits);
         }
     }
 
     public void GenerateStartingBunnies()
     {
-        for (int i = 0; i < startingBunnyCount; i++)
+        for (int i = 0; i < startingBunnyCount - 1; i++)
         {
             GenerateBunny();
         }
+        GenerateBunny(traitList.traitList.Find(x => x.traitName == GameManager.Instance.currentCultRequest.traitRequirement));
     }
 
     private void ReadFromJson()
@@ -264,6 +261,19 @@ public class BunnyManager : MonoBehaviour
             {
                 babyTraits.Add(trait);
             }
+        }
+        int randomizer = Random.Range(0, 11);
+        if (babyTraits.Count >= 5) return babyTraits;
+
+        if (randomizer == 0)
+        {
+            List<TraitType> personalityTraits = traitList.traitList.FindAll(x => x.personalitySet > 0);
+            TraitType newTrait = personalityTraits[Random.Range(0, personalityTraits.Count)];
+            while (babyTraits.Contains(newTrait) && babyTraits.FindAll(x => x.personalitySet == newTrait.personalitySet).Count > 0)
+            {
+                newTrait = personalityTraits[Random.Range(0, personalityTraits.Count)];
+            }
+            babyTraits.Add(newTrait);
         }
         return babyTraits;
     }

@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public int day;
     public CultRequest currentCultRequest;
     public CurrentCustomer currentCustomer;
-    public List<GameObject> bunnyList =  new List<GameObject>();
+    public List<Bunny> bunnyList =  new List<Bunny>();
     public CustomerManager cManager;
     public BunnyManager bManager;
     public int bunniesSold;
@@ -18,21 +18,21 @@ public class GameManager : MonoBehaviour
     public float currCultPerception;
     public List<CultRequest> cultRequestList = new List<CultRequest>
     {
-        new CultRequest("We require the Worrywart. Fear is a faithful thing.", "Worrywart", 2),
-        new CultRequest("Bring the Serene. Calm is devotion.", "Serene", 2),
-        new CultRequest("Bring the Jolly. Joy feeds the circle.",  "Jolly", 3),
-        new CultRequest("We want the Emo. The heavy-hearted are honest.", "Emo", 3),
-        new CultRequest("We demand the Destructive. Let chaos prove loyalty.", "Destructive", 1),
-        new CultRequest("We require the Pristine. Cleanliness is a ritual.", "Pristine", 2),
-        new CultRequest("Bring the Clumsy. The stumbling are blessed.", "Clumsy", 2),
-        new CultRequest("We want the Recluse. The hidden ones hear us best.", "Recluse", 2),
-        new CultRequest("Bring the Social Butterfly. Gatherers strengthen the circle.", "Social Butterfly", 3),
-        new CultRequest("We demand the Glutton. Hunger is sacred.", "Glutton", 1),
-        new CultRequest("Bring those On a Diet. Restraint demonstrates devotion.", "On A Diet", 2),
-        new CultRequest("Bring the Lazy. Stillness is a kind of worship.", "Lazy", 2),
-        new CultRequest("We require the Hyper. Fast blood. Quick faith.", "Hyper", 1),
-        new CultRequest("Bring the Needy. Attachment binds the offering.",  "Needy", 2),
-        new CultRequest("We want the Independent. Strong wills please us.", "Independent", 2)
+        new CultRequest("The masses like them cute. We require the Worrywart. Fear is a faithful thing.", "Worrywart", 2),
+        new CultRequest("The masses like them cute. Bring the Serene. Calm is devotion.", "Serene", 2),
+        new CultRequest("The masses like them cute. Bring the Jolly. Joy feeds the circle.",  "Jolly", 3),
+        new CultRequest("The masses like them cute. We want the Emo. The heavy-hearted are honest.", "Emo", 3),
+        new CultRequest("The masses like them cute. We demand the Destructive. Let chaos prove loyalty.", "Destructive", 1),
+        new CultRequest("The masses like them cute. We require the Pristine. Cleanliness is a ritual.", "Pristine", 2),
+        new CultRequest("The masses like them cute. Bring the Clumsy. The stumbling are blessed.", "Clumsy", 2),
+        new CultRequest("The masses like them cute. We want the Recluse. The hidden ones hear us best.", "Recluse", 2),
+        new CultRequest("The masses like them cute. Bring the Social Butterfly. Gatherers strengthen the circle.", "Social Butterfly", 3),
+        new CultRequest("The masses like them cute. We demand the Glutton. Hunger is sacred.", "Glutton", 1),
+        new CultRequest("The masses like them cute. Bring those On a Diet. Restraint demonstrates devotion.", "On A Diet", 2),
+        new CultRequest("The masses like them cute. Bring the Lazy. Stillness is a kind of worship.", "Lazy", 2),
+        new CultRequest("The masses like them cute. We require the Hyper. Fast blood. Quick faith.", "Hyper", 1),
+        new CultRequest("The masses like them cute. Bring the Needy. Attachment binds the offering.",  "Needy", 2),
+        new CultRequest("The masses like them cute. We want the Independent. Strong wills please us.", "Independent", 2)
     };
 
     private void Awake()
@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
 
     public void StartDay()
     {
+        cManager.dayText.text = "Day " + day;
         prevCultPerception = currCultPerception;
         prevPublicPerception = currPublicPerception;
         if (day % 3 == 1)
@@ -75,6 +76,7 @@ public class GameManager : MonoBehaviour
         else
         {
             cManager.AssignNewCustomer();
+            cManager.nextButton.SetActive(false);
         }
         
 
@@ -84,18 +86,46 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            bManager.PlaceBunny(bunnyList);
-            foreach (GameObject bunny in bunnyList)
+            //bManager.PlaceBunny(bunnyList);
+            foreach (Bunny bunny in bunnyList)
             {
-                bunny.GetComponent<Bunny>().AgeBunnies();
+                bunny.bunnyTail.color = bunny.bunnyColor;
+                bunny.bunnyHead.color = bunny.bunnyColor;
+                bunny.bunnyEars.color = bunny.bunnyColor;
+                bunny.bunnyBody.color = bunny.bunnyColor;
+                bunny.AgeBunnies();
             }
         }
     }
     
     public void EndDay()
     {
+        if (currentCustomer == CurrentCustomer.CultCollect)
+        {
+            day++;
+            SceneManager.LoadScene("EOD", LoadSceneMode.Additive);
+            return;           
+        }
+        if (day % 3 == 0)
+        {
+            cManager.CultArrive(CurrentCustomer.CultCollect);
+            return;
+        }
         day++;
-        SceneManager.LoadScene("EOD");
+        SceneManager.LoadScene("EOD", LoadSceneMode.Additive);
+    }
+
+    public void GoNextDay()
+    {
+        if (day == 4)
+        {
+            EndGame();
+            SceneManager.LoadScene("Ending");
+            return;
+        }
+
+        SceneManager.UnloadSceneAsync("EOD");
+        StartDay();
     }
 
     public void EndGame()

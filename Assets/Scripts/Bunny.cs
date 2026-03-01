@@ -186,13 +186,14 @@ public class Bunny : MonoBehaviour
             if (GameManager.Instance.currentCustomer == CurrentCustomer.Customer)
             {
                 FindFirstObjectByType<CustomerManager>().SellBunny(this);
+                return;
             }
 
             if (GameManager.Instance.currentCustomer == CurrentCustomer.CultCollect)
             {
                 FindFirstObjectByType<CustomerManager>().GiveToCult(this);
+                return;
             }
-            return;
         }
         
         pos.x = Mathf.Clamp(pos.x, minXBounds, maxXBounds);
@@ -215,7 +216,7 @@ public class Bunny : MonoBehaviour
             {
                 Debug.Log(name + " is breeding with " + bunny.name);
                 canBreed = false;
-                bunnyManager.BreedBunnies(this, bunny.GetComponent<Bunny>());
+                GameManager.Instance.bunnyList.AddRange(bunnyManager.BreedBunnies(this, bunny.GetComponent<Bunny>()));
                 bunny.GetComponent<Bunny>().canBreed = false;
                 Color bredAlpha = bunnyTail.color;
                 Color otherBunnyAlpha = bunny.GetComponent<Bunny>().bunnyColor;
