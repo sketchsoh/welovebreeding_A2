@@ -174,7 +174,7 @@ public class Bunny : MonoBehaviour
     private void OnMouseDown()
     {
         held = true;
-        bunnyManager.ShowStatsPanel(bunnyName, cutenessStat, playfulnessStat, friendlinessStat, bunnyTraits);
+        bunnyManager.ShowStatsPanel(bunnyName, bunnyFertility, cutenessStat, playfulnessStat, friendlinessStat, bunnyTraits);
     }
 
     private void OnMouseUp()
@@ -193,6 +193,11 @@ public class Bunny : MonoBehaviour
         
         if (bunnyAge == 0) return;
         if (!canBreed) return;
+        Breed();
+    }
+
+    private void Breed()
+    {
         foreach (GameObject bunny in bunnyManager.bunnies)
         {
             if (bunny == gameObject) continue;
@@ -204,8 +209,36 @@ public class Bunny : MonoBehaviour
                 canBreed = false;
                 bunnyManager.BreedBunnies(this, bunny.GetComponent<Bunny>());
                 bunny.GetComponent<Bunny>().canBreed = false;
+                Color bredAlpha = bunnyTail.color;
+                Color otherBunnyAlpha = bunny.GetComponent<Bunny>().bunnyColor;
+                otherBunnyAlpha.a = 0.75f;
+                bredAlpha.a = 0.75f;
+                bunnyTail.color = bredAlpha;
+                bunnyHead.color = bredAlpha;
+                bunnyBody.color = bredAlpha;
+                bunnyEars.color = bredAlpha;
+                Bunny otherBunny = bunny.GetComponent<Bunny>();
+                otherBunny.bunnyTail.color = otherBunnyAlpha;
+                otherBunny.bunnyHead.color = otherBunnyAlpha;
+                otherBunny.bunnyBody.color = otherBunnyAlpha;
+                otherBunny.bunnyEars.color = otherBunnyAlpha;
                 break;
             }
+        }
+    }
+
+    public void AgeBunnies()
+    {
+        bunnyAge++;
+        if (bunnyAge == 0)
+        {
+            canBreed = false;
+            transform.localScale *= 0.75f;
+        }
+        else
+        {
+            canBreed = true;
+            transform.localScale =  new Vector3(0.75f, 0.75f, 1f);
         }
     }
 }
