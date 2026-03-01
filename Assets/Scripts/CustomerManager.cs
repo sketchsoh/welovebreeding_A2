@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using LitMotion;
 using LitMotion.Extensions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class CustomerManager : MonoBehaviour
 {
@@ -19,7 +22,6 @@ public class CustomerManager : MonoBehaviour
     public Sprite clzySprite;
     public Sprite cultSprite;
     
-    public CultRequest currentCultRequest;
     public List<Bunny> donatedBunnies = new List<Bunny>();
     
     private string[] customerNames = { "Clzy", "Payu", "Hachi" };
@@ -37,24 +39,6 @@ public class CustomerManager : MonoBehaviour
             new CustomerRequest("I want a pet that will always stick close to me! An emotional support animal of sort.", 60f, 65f, 82f)
         };
 
-    public List<CultRequest> cultRequestList = new List<CultRequest>
-    {
-        new CultRequest("We require the Worrywart. Fear is a faithful thing.", "Worrywart", 2),
-        new CultRequest("Bring the Serene. Calm is devotion.", "Serene", 2),
-        new CultRequest("Bring the Jolly. Joy feeds the circle.",  "Jolly", 3),
-        new CultRequest("We want the Emo. The heavy-hearted are honest.", "Emo", 3),
-        new CultRequest("We demand the Destructive. Let chaos prove loyalty.", "Destructive", 1),
-        new CultRequest("We require the Pristine. Cleanliness is a ritual.", "Pristine", 2),
-        new CultRequest("Bring the Clumsy. The stumbling are blessed.", "Clumsy", 2),
-        new CultRequest("We want the Recluse. The hidden ones hear us best.", "Recluse", 2),
-        new CultRequest("Bring the Social Butterfly. Gatherers strengthen the circle.", "Social Butterfly", 3),
-        new CultRequest("We demand the Glutton. Hunger is sacred.", "Glutton", 1),
-        new CultRequest("Bring those On a Diet. Restraint demonstrates devotion.", "On A Diet", 2),
-        new CultRequest("Bring the Lazy. Stillness is a kind of worship.", "Lazy", 2),
-        new CultRequest("We require the Hyper. Fast blood. Quick faith.", "Hyper", 1),
-        new CultRequest("Bring the Needy. Attachment binds the offering.",  "Needy", 2),
-        new CultRequest("We want the Independent. Strong wills please us.", "Independent", 2)
-    };
     private List<string> perfectReaction = new List<string>
     {
         "THIS is the one. I can feel it.",
@@ -87,35 +71,23 @@ public class CustomerManager : MonoBehaviour
         "I can’t take this home. It would ruin my life.",
         "No. Absolutely not. Next!"
     };
-    
-    private void Start()
-    {
-        AssignNewCustomer();
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            currentCultRequest = cultRequestList[Random.Range(0, cultRequestList.Count)];
-            CultArrive();
-        }
-    }
 
-    public void CultArrive()
+    public void CultArrive(CurrentCustomer currentCustomer)
     {
         AssignCustomerSprite("Cult");
         customerName.text = "Cult";
-        
+        GameManager.Instance.currentCustomer = currentCustomer;
         LMotion.Create(-1250f, -550f, 0.5f)
             .WithEase(Ease.InOutElastic)
             .BindToAnchoredPosition3DX(customerSprite.GetComponent<RectTransform>());
-        customerRequestText.text = currentCultRequest.flavorText;
+        customerRequestText.text = GameManager.Instance.currentCultRequest.flavorText;
     }
 
     public void GiveToCult(Bunny bunny)
     {
         donatedBunnies.Add(bunny);
         bunny.bunnyManager.bunnies.Remove(bunny.gameObject);
+        GameManager.Instance.bunnyList.Remove(bunny.gameObject);
         bunny.gameObject.SetActive(false);
     }
 
@@ -124,7 +96,7 @@ public class CustomerManager : MonoBehaviour
         int bunnyCount = 0;
         foreach (Bunny bunny in donatedBunnies)
         {
-            if (bunny.bunnyTraits.Find(x => x.traitName == currentCultRequest.traitRequirement) != null)
+            if (bunny.bunnyTraits.Find(x => x.traitName == GameManager.Instance.currentCultRequest.traitRequirement) != null)
             {
                 bunnyCount++;
             }
@@ -151,8 +123,9 @@ public class CustomerManager : MonoBehaviour
         customerSprite.SetNativeSize();
     }
 
-    private void AssignNewCustomer()
+    public void AssignNewCustomer()
     {
+        GameManager.Instance.currentCustomer = CurrentCustomer.Customer;
         string cName = customerNames[Random.Range(0, customerNames.Length)];
         AssignCustomerSprite(cName);
         customerName.text = cName.ToUpper();
@@ -177,6 +150,7 @@ public class CustomerManager : MonoBehaviour
     {
         LMotion.Create(-550f, -1250f, 0.5f)
             .WithEase(Ease.InOutElastic)
+            .WithOnComplete((() => GameManager.Instance.EndDay()))
             .BindToAnchoredPosition3DX(customerSprite.GetComponent<RectTransform>());
         customerRequestText.text = "";
         customerName.text = "";
@@ -213,12 +187,14 @@ public class CustomerManager : MonoBehaviour
         {
             customerRequestText.text = perfectReaction[Random.Range(0, perfectReaction.Count)];
             bunnyManager.bunnies.Remove(bunny.gameObject);
+            GameManager.Instance.bunnyList.Remove(bunny.gameObject);
             bunny.gameObject.SetActive(false);
         }
         else if (happiness >= 50)
         {
             customerRequestText.text = goodReaction[Random.Range(0, goodReaction.Count)];
             bunnyManager.bunnies.Remove(bunny.gameObject);
+            GameManager.Instance.bunnyList.Remove(bunny.gameObject);
             bunny.gameObject.SetActive(false);
         }
         else if (happiness >= 20)
@@ -241,7 +217,24 @@ public class CustomerManager : MonoBehaviour
 
         Invoke(nameof(CustomerLeave), 2f);
     }
-    
+
+    public void NextButtonSettle()
+    {
+        if (GameManager.Instance.currentCustomer == CurrentCustomer.Customer)
+        {
+            return;
+        }
+
+        if (GameManager.Instance.currentCustomer == CurrentCustomer.CultStart)
+        {
+            AssignNewCustomer();
+        }
+
+        if (GameManager.Instance.currentCustomer == CurrentCustomer.CultCollect)
+        {
+            SettleCult();
+        }
+    }
 }
 
 public class CustomerRequest

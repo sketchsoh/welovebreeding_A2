@@ -53,8 +53,11 @@ public class BunnyManager : MonoBehaviour
         traitList = new TraitData();
         bunnies = new List<GameObject>();
         ReadFromJson();
-        GenerateStartingBunnies();
+        // GenerateStartingBunnies();
+        GameManager.Instance.bManager = this;
+        GameManager.Instance.cManager = FindFirstObjectByType<CustomerManager>();
         HideStatsPanel();
+        GameManager.Instance.StartDay();
     }
 
     void Update()
@@ -100,7 +103,7 @@ public class BunnyManager : MonoBehaviour
         statsPanel.SetActive(false);
     }
 
-    public void GenerateBunny()
+    private void GenerateBunny()
     {
         int rand =  Random.Range(0, 3);
         BunnyType selectedBunnyType = (BunnyType)rand;
@@ -133,6 +136,7 @@ public class BunnyManager : MonoBehaviour
         Color bunnyColor = Random.ColorHSV(0.0f, 1.0f, 0.1f, 0.4f, 0.7f, 1.0f);
         Bunny newBunny = Instantiate(bunnyPrefab, transform.position, Quaternion.identity).GetComponent<Bunny>();
         bunnies.Add(newBunny.gameObject);
+        GameManager.Instance.bunnyList.Add(newBunny.gameObject);
         List<TraitType> newTraitList = new List<TraitType>();
         int traitCount = Random.Range(1, 3);
         newTraitList.Add(traitList.traitList.FindAll(x => x.personalitySet == 0)[Random.Range(0, traitList.traitList.FindAll(x => x.personalitySet == 0).Count)]);
@@ -154,7 +158,15 @@ public class BunnyManager : MonoBehaviour
         newBunny.transform.position = new Vector3(Random.Range(minXBounds, maxXBounds), Random.Range(minYBounds, maxYBounds));
     }
 
-    private void GenerateStartingBunnies()
+    public void PlaceBunny(List<GameObject> bunnyList)
+    {
+        foreach (GameObject bunny in bunnyList)
+        {
+            Instantiate(bunny);
+        }
+    }
+
+    public void GenerateStartingBunnies()
     {
         for (int i = 0; i < startingBunnyCount; i++)
         {
@@ -256,7 +268,7 @@ public class BunnyManager : MonoBehaviour
         return babyTraits;
     }
 
-    private List<string> bunnyNames = new List<string>()
+    private static List<string> bunnyNames = new List<string>()
     {
         "USAGI",
         "BABY",

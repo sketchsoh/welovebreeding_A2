@@ -22,8 +22,13 @@ public class PlayScript : MonoBehaviour, IPointerEnterHandler
         SoundManager.Instance.PlayRandomSFXClip(startbtnSFX, transform, true, 1f);
         SoundManager.Instance.TransitionMusicClip(MusicType.Game, 1f);
         LMotion.Create(0f, 1f, 1f)
-            .WithOnComplete(() => SceneManager.LoadScene("Game"))
+            .WithOnComplete(SwitchToGame)
             .BindToColorA(Fade);
+    }
+
+    private void SwitchToGame()
+    {
+        SceneManager.LoadScene("Game");
     }
     
     public void QuitGame()

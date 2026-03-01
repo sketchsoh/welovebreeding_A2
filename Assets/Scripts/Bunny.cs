@@ -183,7 +183,15 @@ public class Bunny : MonoBehaviour
         Vector2 pos = transform.position;
         if (pos.x >= -8f && pos.x <= -2f)
         {
-            FindFirstObjectByType<CustomerManager>().SellBunny(this);
+            if (GameManager.Instance.currentCustomer == CurrentCustomer.Customer)
+            {
+                FindFirstObjectByType<CustomerManager>().SellBunny(this);
+            }
+
+            if (GameManager.Instance.currentCustomer == CurrentCustomer.CultCollect)
+            {
+                FindFirstObjectByType<CustomerManager>().GiveToCult(this);
+            }
             return;
         }
         
