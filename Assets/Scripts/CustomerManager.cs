@@ -39,21 +39,21 @@ public class CustomerManager : MonoBehaviour
 
     public List<CultRequest> cultRequestList = new List<CultRequest>
     {
-        new CultRequest("We require the Worrywart. Fear is a faithful thing.", "Worrywart", Random.Range(2, 5)),
-        new CultRequest("Bring the Serene. Calm is devotion.", "Serene", Random.Range(2, 5)),
-        new CultRequest("Bring the Jolly. Joy feeds the circle.",  "Jolly", Random.Range(3, 6)),
-        new CultRequest("We want the Emo. The heavy-hearted are honest.", "Emo", Random.Range(3, 5)),
-        new CultRequest("We demand the Destructive. Let chaos prove loyalty.", "Destructive", Random.Range(1, 4)),
-        new CultRequest("We require the Pristine. Cleanliness is a ritual.", "Pristine", Random.Range(2, 5)),
-        new CultRequest("Bring the Clumsy. The stumbling are blessed.", "Clumsy", Random.Range(2, 5)),
-        new CultRequest("We want the Recluse. The hidden ones hear us best.", "Recluse", Random.Range(2, 5)),
-        new CultRequest("Bring the Social Butterfly. Gatherers strengthen the circle.", "Social Butterfly", Random.Range(3, 6)),
-        new CultRequest("We demand the Glutton. Hunger is sacred.", "Glutton", Random.Range(1, 4)),
-        new CultRequest("Bring those On a Diet. Restraint demonstrates devotion.", "On A Diet", Random.Range(2, 5)),
-        new CultRequest("Bring the Lazy. Stillness is a kind of worship.", "Lazy", Random.Range(2, 5)),
-        new CultRequest("We require the Hyper. Fast blood. Quick faith.", "Hyper", Random.Range(1, 4)),
-        new CultRequest("Bring the Needy. Attachment binds the offering.",  "Needy", Random.Range(2, 5)),
-        new CultRequest("We want the Independent. Strong wills please us.", "Independent", Random.Range(2, 5))
+        new CultRequest("We require the Worrywart. Fear is a faithful thing.", "Worrywart", 2),
+        new CultRequest("Bring the Serene. Calm is devotion.", "Serene", 2),
+        new CultRequest("Bring the Jolly. Joy feeds the circle.",  "Jolly", 3),
+        new CultRequest("We want the Emo. The heavy-hearted are honest.", "Emo", 3),
+        new CultRequest("We demand the Destructive. Let chaos prove loyalty.", "Destructive", 1),
+        new CultRequest("We require the Pristine. Cleanliness is a ritual.", "Pristine", 2),
+        new CultRequest("Bring the Clumsy. The stumbling are blessed.", "Clumsy", 2),
+        new CultRequest("We want the Recluse. The hidden ones hear us best.", "Recluse", 2),
+        new CultRequest("Bring the Social Butterfly. Gatherers strengthen the circle.", "Social Butterfly", 3),
+        new CultRequest("We demand the Glutton. Hunger is sacred.", "Glutton", 1),
+        new CultRequest("Bring those On a Diet. Restraint demonstrates devotion.", "On A Diet", 2),
+        new CultRequest("Bring the Lazy. Stillness is a kind of worship.", "Lazy", 2),
+        new CultRequest("We require the Hyper. Fast blood. Quick faith.", "Hyper", 1),
+        new CultRequest("Bring the Needy. Attachment binds the offering.",  "Needy", 2),
+        new CultRequest("We want the Independent. Strong wills please us.", "Independent", 2)
     };
     private List<string> perfectReaction = new List<string>
     {
@@ -94,6 +94,11 @@ public class CustomerManager : MonoBehaviour
     }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            currentCultRequest = cultRequestList[Random.Range(0, cultRequestList.Count)];
+            CultArrive();
+        }
     }
 
     public void CultArrive()
@@ -109,7 +114,21 @@ public class CustomerManager : MonoBehaviour
 
     public void GiveToCult(Bunny bunny)
     {
-        
+        donatedBunnies.Add(bunny);
+        bunny.bunnyManager.bunnies.Remove(bunny.gameObject);
+        bunny.gameObject.SetActive(false);
+    }
+
+    public void SettleCult()
+    {
+        int bunnyCount = 0;
+        foreach (Bunny bunny in donatedBunnies)
+        {
+            if (bunny.bunnyTraits.Find(x => x.traitName == currentCultRequest.traitRequirement) != null)
+            {
+                bunnyCount++;
+            }
+        }
     }
 
     private void AssignCustomerSprite(string customerName)
