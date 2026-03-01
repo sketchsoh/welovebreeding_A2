@@ -239,30 +239,54 @@ public class CustomerManager : MonoBehaviour
         customerName.text = "";
     }
 
+    // Changed by payu. Values are originally 100 for the clamp
     public void SellBunny(Bunny bunny)
     {
         float happiness = 0;
         int statCount = 0;
-        requestQueue.TryPeek(out CustomerRequest currentCustomerRequest);
+        float lowestStat = 120f; //added by payu
+        if (!requestQueue.TryPeek(out CustomerRequest currentCustomerRequest))
+        {
+            Debug.LogWarning("Sell attempted but no customer request exists.");
+            return;
+        }
         if (currentCustomerRequest.cutenessRequirement != 0)
         {
-            happiness = Mathf.Clamp(((bunny.cutenessStat / currentCustomerRequest.cutenessRequirement) * 100), 0, 100);
+            float score = Mathf.Clamp(
+                (bunny.cutenessStat / currentCustomerRequest.cutenessRequirement) * 100,
+                0, 120);
+
+            happiness += score;
+            lowestStat = Mathf.Min(lowestStat, score);
             statCount++;
         }
 
         if (currentCustomerRequest.playfulnessRequirement != 0)
         {
-            happiness += Mathf.Clamp(((bunny.playfulnessStat / currentCustomerRequest.playfulnessRequirement) * 100), 0, 100);
+            float score = Mathf.Clamp(
+                (bunny.playfulnessStat / currentCustomerRequest.playfulnessRequirement) * 100,
+                0, 120);
+
+            happiness += score;
+            lowestStat = Mathf.Min(lowestStat, score);
             statCount++;
         }
 
         if (currentCustomerRequest.friendlinessRequirement != 0)
         {
-            happiness += Mathf.Clamp(((bunny.friendlinessStat / currentCustomerRequest.friendlinessRequirement) * 100), 0, 100);
+            float score = Mathf.Clamp(
+                (bunny.friendlinessStat / currentCustomerRequest.friendlinessRequirement) * 100,
+                0, 120);
+
+            happiness += score;
+            lowestStat = Mathf.Min(lowestStat, score);
             statCount++;
         }
         
-        happiness /= statCount;
+        float average = happiness / statCount;
+        happiness = (average * 0.7f) + (lowestStat * 0.3f); 
+        // Changed by payu. Originally these two lines are just
+        //happiness /= statCount;
 
         BunnyManager bunnyManager = bunny.bunnyManager;
 
