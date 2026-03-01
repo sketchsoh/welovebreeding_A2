@@ -18,7 +18,9 @@ public class CustomerManager : MonoBehaviour
     public Sprite payuSprite;
     public Sprite clzySprite;
     public Sprite cultSprite;
-
+    
+    public CultRequest currentCultRequest;
+    public List<Bunny> donatedBunnies = new List<Bunny>();
     
     private string[] customerNames = { "Clzy", "Payu", "Hachi" };
     private static int currentCustomerIndex = 0;
@@ -34,7 +36,25 @@ public class CustomerManager : MonoBehaviour
             new CustomerRequest("Something independent. I need my personal space.", 52f, 0f, 40f),
             new CustomerRequest("I want a pet that will always stick close to me! An emotional support animal of sort.", 60f, 65f, 82f)
         };
-    
+
+    public List<CultRequest> cultRequestList = new List<CultRequest>
+    {
+        new CultRequest("We require the Worrywart. Fear is a faithful thing.", "Worrywart", Random.Range(2, 5)),
+        new CultRequest("Bring the Serene. Calm is devotion.", "Serene", Random.Range(2, 5)),
+        new CultRequest("Bring the Jolly. Joy feeds the circle.",  "Jolly", Random.Range(3, 6)),
+        new CultRequest("We want the Emo. The heavy-hearted are honest.", "Emo", Random.Range(3, 5)),
+        new CultRequest("We demand the Destructive. Let chaos prove loyalty.", "Destructive", Random.Range(1, 4)),
+        new CultRequest("We require the Pristine. Cleanliness is a ritual.", "Pristine", Random.Range(2, 5)),
+        new CultRequest("Bring the Clumsy. The stumbling are blessed.", "Clumsy", Random.Range(2, 5)),
+        new CultRequest("We want the Recluse. The hidden ones hear us best.", "Recluse", Random.Range(2, 5)),
+        new CultRequest("Bring the Social Butterfly. Gatherers strengthen the circle.", "Social Butterfly", Random.Range(3, 6)),
+        new CultRequest("We demand the Glutton. Hunger is sacred.", "Glutton", Random.Range(1, 4)),
+        new CultRequest("Bring those On a Diet. Restraint demonstrates devotion.", "On A Diet", Random.Range(2, 5)),
+        new CultRequest("Bring the Lazy. Stillness is a kind of worship.", "Lazy", Random.Range(2, 5)),
+        new CultRequest("We require the Hyper. Fast blood. Quick faith.", "Hyper", Random.Range(1, 4)),
+        new CultRequest("Bring the Needy. Attachment binds the offering.",  "Needy", Random.Range(2, 5)),
+        new CultRequest("We want the Independent. Strong wills please us.", "Independent", Random.Range(2, 5))
+    };
     private List<string> perfectReaction = new List<string>
     {
         "THIS is the one. I can feel it.",
@@ -66,15 +86,30 @@ public class CustomerManager : MonoBehaviour
         "You must be trolling me.",
         "I can’t take this home. It would ruin my life.",
         "No. Absolutely not. Next!"
- 
     };
-
+    
     private void Start()
     {
         AssignNewCustomer();
     }
     private void Update()
     {
+    }
+
+    public void CultArrive()
+    {
+        AssignCustomerSprite("Cult");
+        customerName.text = "Cult";
+        
+        LMotion.Create(-1250f, -550f, 0.5f)
+            .WithEase(Ease.InOutElastic)
+            .BindToAnchoredPosition3DX(customerSprite.GetComponent<RectTransform>());
+        customerRequestText.text = currentCultRequest.flavorText;
+    }
+
+    public void GiveToCult(Bunny bunny)
+    {
+        
     }
 
     private void AssignCustomerSprite(string customerName)
@@ -125,6 +160,7 @@ public class CustomerManager : MonoBehaviour
             .WithEase(Ease.InOutElastic)
             .BindToAnchoredPosition3DX(customerSprite.GetComponent<RectTransform>());
         customerRequestText.text = "";
+        customerName.text = "";
     }
 
     public void SellBunny(Bunny bunny)
@@ -202,5 +238,19 @@ public class CustomerRequest
         playfulnessRequirement = playfulness;
         cutenessRequirement = cuteness;
         friendlinessRequirement = friendliness;
+    }
+}
+
+public class CultRequest
+{
+    public string flavorText;
+    public string traitRequirement;
+    public int AmountRequirement;
+
+    public CultRequest(string flavor, string trait, int amount)
+    {
+        flavorText = flavor;
+        traitRequirement = trait;
+        AmountRequirement = amount;
     }
 }

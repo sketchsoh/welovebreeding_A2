@@ -11,7 +11,7 @@ public class BunnyManager : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] private GameObject statsPanel;
     [SerializeField] private TextMeshProUGUI bunnyName;
-    [SerializeField] private Image bunnyIcon;
+    [SerializeField] private TextMeshProUGUI bunnyFertility;
     [SerializeField] private Slider bunnyCuteness;
     [SerializeField] private Slider bunnyPlayfulness;
     [SerializeField] private Slider bunnyFriendliness;
@@ -66,7 +66,7 @@ public class BunnyManager : MonoBehaviour
             
     }
 
-    public void ShowStatsPanel(string name, float cutenessStat, float playfulnessStat, float affectionStat, List<TraitType> traits)
+    public void ShowStatsPanel(string name, int fertility, float cutenessStat, float playfulnessStat, float affectionStat, List<TraitType> traits)
     {
         statsPanel.SetActive(true);
         bunnyName.text = name;
@@ -85,9 +85,14 @@ public class BunnyManager : MonoBehaviour
         string traitListString = "";
         foreach (TraitType trait in traits)
         {
-            traitListString += trait.traitName + "\n";
+            string cutenessString = (trait.cutenessAdjustment >= 0)? "+" + trait.cutenessAdjustment : trait.cutenessAdjustment.ToString();
+            string playfulnessString = (trait.playfulnessAdjustment >=0) ? "+" + trait.playfulnessAdjustment : trait.playfulnessAdjustment.ToString();
+            string friendlinessString = (trait.friendlinessAdjustment >= 0) ? "+" + trait.friendlinessAdjustment : trait
+                .friendlinessAdjustment.ToString();
+            traitListString += "C:" + cutenessString + " P:" + playfulnessString + " F:" + friendlinessString + "    " + trait.traitName + "\n";
         }
         traitPanel.text = traitListString;
+        bunnyFertility.text = "Fertility: " + fertility;
     }
 
     public void HideStatsPanel()
