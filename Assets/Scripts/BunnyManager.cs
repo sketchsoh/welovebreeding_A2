@@ -64,13 +64,13 @@ public class BunnyManager : MonoBehaviour
     {
         statsPanel.SetActive(true);
         bunnyName.text = name;
-        LMotion.Create(0f, cutenessStat / 100f, 0.25f)
+        LMotion.Create(0f, cutenessStat / 120f, 0.25f)
             .WithEase(Ease.InSine)
             .Bind(x => bunnyCuteness.value = x);
-        LMotion.Create(0f, playfulnessStat / 100f, 0.25f)
+        LMotion.Create(0f, playfulnessStat / 120f, 0.25f)
             .WithEase(Ease.InSine)
             .Bind(x => bunnyPlayfulness.value = x);
-        LMotion.Create(0f, affectionStat / 100f, 0.25f)
+        LMotion.Create(0f, affectionStat / 120f, 0.25f)
             .WithEase(Ease.InSine)
             .Bind(x => bunnyFriendliness.value = x);
         // bunnyCuteness.value = cutenessStat / 100;
